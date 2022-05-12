@@ -140,6 +140,16 @@ let kittens = api.kittens.get();
   }
 }
 ```
+> Success Response `400 BAD REQUEST`
+
+```json
+{
+  "isSuccess": false,
+  "message": "invalid_input",
+  "object": {}
+  
+}
+```
 
 ### HTTP Request
 
