@@ -246,7 +246,7 @@ let kittens = api.kittens.get();
   }
 }
 ```
-> Success Response `400 BAD REQUEST`
+> Failed Response `400 BAD REQUEST`
 
 ```json
 {
@@ -263,10 +263,10 @@ let kittens = api.kittens.get();
 
 ### Body Parameters
 
-Parameter | Description
---------- | -----------
-hookUrl | Your webhook url where you'd like to listen for this event.
-customerCode | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+Parameter | Type | Description
+--------- | ---- | -----------
+hookUrl | **String** | Your webhook url where you'd like to listen for this event.
+customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
 
 ## Add New Product Event
 
@@ -317,6 +317,16 @@ let kittens = api.kittens.get();
   }
 }
 ```
+> Failed Response `400 BAD REQUEST`
+
+```json
+{
+  "isSuccess": false,
+  "responseMessage": "invalid_input",
+  "object": {}
+  
+}
+```
 
 ### HTTP Request
 
@@ -324,10 +334,10 @@ let kittens = api.kittens.get();
 
 ### Body Parameters
 
-Parameter | Description
---------- | -----------
-hookUrl | Your webhook url where you'd like to listen for this event.
-customerCode | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+Parameter | Type | Description
+--------- | ---- | -----------
+hookUrl | **String** | Your webhook url where you'd like to listen for this event.
+customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
 
 
 ## Order Shipped Event
@@ -379,6 +389,16 @@ let kittens = api.kittens.get();
   }
 }
 ```
+> Failed Response `400 BAD REQUEST`
+
+```json
+{
+  "isSuccess": false,
+  "responseMessage": "invalid_input",
+  "object": {}
+  
+}
+```
 
 ### HTTP Request
 
@@ -386,10 +406,11 @@ let kittens = api.kittens.get();
 
 ### Body Parameters
 
-Parameter | Description
---------- | -----------
-hookUrl | Your webhook url where you'd like to listen for this event.
-customerCode | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+Parameter | Type | Description
+--------- | ---- | -----------
+hookUrl | **String** | Your webhook url where you'd like to listen for this event.
+customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+
 
 ## New Order Event
 
@@ -440,6 +461,16 @@ let kittens = api.kittens.get();
   }
 }
 ```
+> Failed Response `400 BAD REQUEST`
+
+```json
+{
+  "isSuccess": false,
+  "responseMessage": "invalid_input",
+  "object": {}
+  
+}
+```
 
 ### HTTP Request
 
@@ -447,8 +478,9 @@ let kittens = api.kittens.get();
 
 ### Body Parameters
 
-Parameter | Description
---------- | -----------
-hookUrl | Your webhook url where you'd like to listen for this event.
-customerCode | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+Parameter | Type | Description
+--------- | ---- | -----------
+hookUrl | **String** | Your webhook url where you'd like to listen for this event.
+customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+
 
