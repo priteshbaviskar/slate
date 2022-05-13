@@ -425,10 +425,12 @@ html, body {
 
     tr:nth-child(odd)>td {
       background-color: lighten($main-bg,4.2%);
+      border-bottom: 1px solid #ccc;
     }
 
     tr:nth-child(even)>td {
       background-color: lighten($main-bg,2.4%);
+      border-bottom: 1px solid #ccc;
     }
   }
 
