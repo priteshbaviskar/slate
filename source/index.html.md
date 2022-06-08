@@ -24,11 +24,23 @@ meta:
 
 # API Overview
 
+
+```shell
+ _   _      _ _                            _     _   _ 
+| | | |    | | |                          | |   | | | |
+| |_| | ___| | | ___   __      _____  _ __| | __| | | |
+|  _  |/ _ \ | |/ _ \  \ \ /\ / / _ \| '__| |/ _` | | |
+| | | |  __/ | | (_) |  \ V  V / (_) | |  | | (_| | |_|
+\_| |_/\___|_|_|\___/    \_/\_/ \___/|_|  |_|\__,_| (_)
+                                                       
+```
+
 The purpose of this documentation is to understand the list of available Storeplum APIs and their corresponding requests and response for a seamless integration of Storeplum with your app. Storeplum API 1.0 allows data to be created, read and updated using requests in JSON format and using standard REST HTTP methods which are understood by most of the HTTP clients.
 
 The current Storeplum REST API integration version is `v1` which takes a first-order position in endpoints. 
 
 The documentation language binding is in Shell. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+
 
 ## Request/Response Format
 
@@ -42,9 +54,17 @@ Some general information about responses:
 4. Blank fields are generally included as null or emtpy **String** instead of being omitted.
 
 
-
-
 # Authentication
+
+> To authorize, use this code:
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "https://api.storeplum.in/integration/example-endpoint" \
+  -H "X-SP-INTEGRATION: <YOUR-API-KEY>"
+```
+> Make sure to replace the value for header `x-sp-integration` with your API key.
+
 
 Each incoming request from your app to Storeplum API has to be authenticated using an API key. Storeplum uses pre-generated API key for external integrations which can be obtained in [Storeplum Dashboard](https://dashboard.storeplum.in/) under integrations section. 
 
@@ -54,10 +74,6 @@ In case you forget your API key, deactivate the integration and activate it agai
 
 
 ![Activating Zapier integration for Storeplum](images/image-zapier.png)
-
-
-> To authorize, use this code:
-
 
 <!-- ```java
 import okhttp3.*;
@@ -70,19 +86,12 @@ Request request = new Request.Builder()
 Response response = okHttpClient.newCall(request).execute();
 ``` -->
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "https://api.storeplum.in/integration/example-endpoint" \
-  -H "X-SP-INTEGRATION: <YOUR-API-KEY>"
-```
-
 <!-- ```javascript
 const kittn = require('kittn');
 
 let api = kittn.authorize('meowmeowmeow');
 ``` -->
 
-> Make sure to replace the value for header `x-sp-integration` with your API key.
 
 Storeplum uses the above API key to allow access to the APIs. Include this API key in all requests to Storeplum API in a header with name `X-SP-INTEGRATION`
 

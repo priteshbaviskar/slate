@@ -360,7 +360,14 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='api-overview'>API Overview</h1>
+        <h1 id='api-overview'>API Overview</h1><div class="highlight"><pre class="highlight shell tab-shell"><code> _   _      _ _                            _     _   _ 
+| | | |    | | |                          | |   | | | |
+| |_| | ___| | | ___   __      _____  _ __| | __| | | |
+|  _  |/ _ <span class="se">\ </span>| |/ _ <span class="se">\ </span> <span class="se">\ \ </span>/<span class="se">\ </span>/ / _ <span class="se">\|</span> <span class="s1">'__| |/ _` | | |
+| | | |  __/ | | (_) |  \ V  V / (_) | |  | | (_| | |_|
+\_| |_/\___|_|_|\___/    \_/\_/ \___/|_|  |_|\__,_| (_)
+
+</span></code></pre></div>
 <p>The purpose of this documentation is to understand the list of available Storeplum APIs and their corresponding requests and response for a seamless integration of Storeplum with your app. Storeplum API 1.0 allows data to be created, read and updated using requests in JSON format and using standard REST HTTP methods which are understood by most of the HTTP clients.</p>
 
 <p>The current Storeplum REST API integration version is <code>v1</code> which takes a first-order position in endpoints. </p>
@@ -378,6 +385,17 @@
 <li>Blank fields are generally included as null or emtpy <strong>String</strong> instead of being omitted.</li>
 </ol>
 <h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"https://api.storeplum.in/integration/example-endpoint"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span>
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace the value for header <code>x-sp-integration</code> with your API key.</p>
+</blockquote>
+
 <p>Each incoming request from your app to Storeplum API has to be authenticated using an API key. Storeplum uses pre-generated API key for external integrations which can be obtained in <a href="https://dashboard.storeplum.in/">Storeplum Dashboard</a> under integrations section. </p>
 
 <p>In this section, you will see a list of supported apps by Storeplum. Click on your app and select <code>Activate</code>. Once activated, you will see the API key for this integration on the screen. Copy this key and please make sure to save it in a secure location as it won&#39;t be available to view again later.</p>
@@ -385,10 +403,6 @@
 <p>In case you forget your API key, deactivate the integration and activate it again to get a new key.</p>
 
 <p><img src="images/image-zapier-3c7c6a5d.png" alt="Activating Zapier integration for Storeplum" /></p>
-
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
 
 <!-- ```java
 import okhttp3.*;
@@ -400,19 +414,12 @@ Request request = new Request.Builder()
                 .build();
 Response response = okHttpClient.newCall(request).execute();
 ``` -->
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"https://api.storeplum.in/integration/example-endpoint"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span>
-</code></pre></div>
+
 <!-- ```javascript
 const kittn = require('kittn');
 
 let api = kittn.authorize('meowmeowmeow');
 ``` -->
-
-<blockquote>
-<p>Make sure to replace the value for header <code>x-sp-integration</code> with your API key.</p>
-</blockquote>
 
 <p>Storeplum uses the above API key to allow access to the APIs. Include this API key in all requests to Storeplum API in a header with name <code>X-SP-INTEGRATION</code></p>
 
