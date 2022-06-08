@@ -22,9 +22,9 @@ meta:
     content: Storeplum API documentation for external integrations.
 ---
 
-# Overview
+# API Overview
 
-The purpose of this documentation is to understand the list of available Storeplum APIs and their corresponding requests and response for a seamless Zapier integration of Storeplum with your app. Storeplum API 1.0 allows data to be created, read and updated using requests in JSON format and using standard REST HTTP methods which are understood by most of the HTTP clients.
+The purpose of this documentation is to understand the list of available Storeplum APIs and their corresponding requests and response for a seamless integration of Storeplum with your app. Storeplum API 1.0 allows data to be created, read and updated using requests in JSON format and using standard REST HTTP methods which are understood by most of the HTTP clients.
 
 The current Storeplum REST API integration version is `v1` which takes a first-order position in endpoints. 
 
@@ -37,7 +37,7 @@ The default response format is JSON. Requests with a responseMessage-body use pl
 Some general information about responses:
 
 1. Resource IDs are returned as integers.
-2. Any decimal monetary amount, such as prices or totals, will be returned as **String**s with two decimal places. 
+2. Any decimal monetary amount, such as prices or totals, will be returned as **Number** with two decimal places. 
 3. Other amounts, such as item counts, are returned as integers. 
 4. Blank fields are generally included as null or emtpy **String** instead of being omitted.
 
@@ -46,9 +46,11 @@ Some general information about responses:
 
 # Authentication
 
-Each incoming request from Zapier to Storeplum API has to be authenticated using pre-generated keys. Storeplum uses pre-generated API keys for Zapier integration which can be obtained in [Storeplum Dashboard](https://dashboard.storeplum.in/) under integrations section. 
+Each incoming request from your app to Storeplum API has to be authenticated using an API key. Storeplum uses pre-generated API key for external integrations which can be obtained in [Storeplum Dashboard](https://dashboard.storeplum.in/) under integrations section. 
 
-Click on Zapier to activate your Zapier integration with Storeplum. Once activated, copy the API key seen on the screen. Please make sure to save this key as it won't be available to view later.
+In this section, you will see a list of supported apps by Storeplum. Click on your app and select `Activate`. Once activated, you will see the API key for this integration on the screen. Copy this key and please make sure to save it in a secure location as it won't be available to view again later.
+
+In case you forget your API key, deactivate the integration and activate it again to get a new key.
 
 
 ![Activating Zapier integration for Storeplum](images/image-zapier.png)
@@ -70,7 +72,7 @@ Response response = okHttpClient.newCall(request).execute();
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
+curl "https://api.storeplum.in/integration/example-endpoint" \
   -H "X-SP-INTEGRATION: <YOUR-API-KEY>"
 ```
 
@@ -109,7 +111,7 @@ Status | Description
 
 ```shell
 
-curl "https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/action/product/save" \
+curl "https://api.storeplum.in/integration/action/product/save" \
   -H "Content-Type: application/json"\
   -H "X-SP-INTEGRATION: <YOUR-API-KEY>"\
   -d '{
@@ -117,7 +119,7 @@ curl "https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/act
     "productName": "Product name",
     "productDescription": "Product description",
     "productSEOTag": "product-seo-tag",
-    "productCategoryID": 99,
+    "productCategorySeoTag": "product-category-seo-tag",
     "originalPrice": 123.45,
     "basePrice": 123.45,
     "configDefaultDraftName": "Product default configuration name",
@@ -157,7 +159,7 @@ In order to add a product through API, you'll need to use the API integration ke
 
 ### HTTP Request
 
-`POST https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/action/product/save`
+`POST https://api.storeplum.in/integration/action/product/save`
 
 ### HTTP Headers
 
@@ -171,7 +173,7 @@ customerCode | **String** | Storeplum Customer Code which can be found in your S
 productName | **String** | Name of the product
 productDescripion | **String** | Description of the product. Seen on product landing page.
 productSEOTag | **String** | A unique SEO friendly slug for product page. Please note that two different products cannot have the same slug. 
-productCategoryID | **Number** | Product category ID reflecting the Category to which this product belongs to. A `New Product Event` from platform returns the productCategoryID for that product.
+productCategorySeoTag | **Number** | A unique SEO friendly slug for product category page. A `New Product Event` from platform returns the `productCategorySeoTag` for that product.
 originalPrice | **Number** | Product selling price on the website.
 basePrice | **Number** | Defaults to original product price. Discounted price cannot be greater than original price. This price is shown next to the striked off value of the original product price on the website.
 configDefaultDraftName | **String** | Default draft name for this product. Draft name can be same as product name.
@@ -212,7 +214,7 @@ RequestBody body = RequestBody.create(new Gson().toJson(data),
                 MediaType.parse("application/json"));
 
 Request request = new Request.Builder()
-                .url("https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_customer/subscribe")
+                .url("https://api.storeplum.in/integration/zapier/new_customer/subscribe")
                 .post(body)
                 .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
                 .build();
@@ -220,11 +222,14 @@ Response response = okHttpClient.newCall(request).execute();
 ``` -->
 
 ```shell
-curl "https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_customer/subscribe" \
+curl "https://api.dashboard.storeplum.in/integration/subscribe" \
+  -X POST
   -H "X-SP-INTEGRATION: <YOUR-API-KEY>"\
   -d '{
-    hookUrl: "<your-webhook-url>",
-    customerCode: "your-storeplum-customer-code"
+    "hookUrl"      : "<your-webhook-url>",
+    "customerCode" : "<your-storeplum-customer-code>",
+    "triggerType"  : "new_customer",
+    "platform"     : "Your app name which is interested in listening to this event."
   }'
 ```
 
@@ -259,18 +264,20 @@ let kittens = api.kittens.get();
 
 ### HTTP Request
 
-`POST https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_customer/subscribe`
+`POST https://api.dashboard.storeplum.in/integration/subscribe`
 
 ### Body Parameters
 
 Parameter | Type | Description
 --------- | ---- | -----------
-hookUrl | **String** | Your webhook url where you'd like to listen for this event.
+hookUrl | **String** | Your webhook url to listen for this event.
 customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+triggerType | **String** | `new_customer`
+platform | **String** | Your app name which is interested in listening to this event. Please check the *Integrations* section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add `zapier` as your platform value. If your app name is Pabbly, add `pabbly` as your platform value and so on.
 
 ## Add New Product Event
 
-Add your webhook url to start listening to add new product event. This event is triggered whenever a new product is added to your Storeplum account.
+Add your webhook url to start listening to *Add New Product* event. This event is triggered whenever a new product is added to your Storeplum account.
 
 <!-- ```java
 import okhttp3.*;
@@ -283,7 +290,7 @@ RequestBody body = RequestBody.create(new Gson().toJson(data),
                 MediaType.parse("application/json"));
 
 Request request = new Request.Builder()
-                .url("https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_product/subscribe")
+                .url("https://api.storeplum.in/integration/zapier/new_product/subscribe")
                 .post(body)
                 .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
                 .build();
@@ -291,11 +298,14 @@ Response response = okHttpClient.newCall(request).execute();
 ``` -->
 
 ```shell
-curl "https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_product/subscribe" \
+curl "https://api.dashboard.storeplum.in/integration/subscribe" \
+  -X POST
   -H "X-SP-INTEGRATION: <YOUR-API-KEY>"\
   -d '{
-    hookUrl: "<your-webhook-url>",
-    customerCode: "your-storeplum-customer-code"
+    "hookUrl"      : "<your-webhook-url>",
+    "customerCode" : "<your-storeplum-customer-code>",
+    "triggerType"  : "new_product",
+    "platform"     : "Your app name which is interested in listening to this event."
   }'
 ```
 
@@ -330,7 +340,7 @@ let kittens = api.kittens.get();
 
 ### HTTP Request
 
-`POST https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_product/subscribe`
+`POST https://api.storeplum.in/integration/subscribe`
 
 ### Body Parameters
 
@@ -338,78 +348,8 @@ Parameter | Type | Description
 --------- | ---- | -----------
 hookUrl | **String** | Your webhook url where you'd like to listen for this event.
 customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
-
-
-## Order Shipped Event
-
-Add your webhook url to start listening to order shipped event. This event is triggered whenever a order is marked as `Shipped` in your Storeplum account.
-
-<!-- ```java
-import okhttp3.*;
-
-Map<**String**, Object> data = new HashMap<>();
-data.put("hookUrl", "<your-webhook-url>");
-data.put("customerCode", "your-storeplum-customer-code");
-
-RequestBody body = RequestBody.create(new Gson().toJson(data),
-                MediaType.parse("application/json"));
-
-Request request = new Request.Builder()
-                .url("https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/order_shipped/subscribe")
-                .post(body)
-                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
-                .build();
-Response response = okHttpClient.newCall(request).execute();
-``` -->
-
-```shell
-curl "https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/order_shipped/subscribe" \
-  -H "X-SP-INTEGRATION: <YOUR-API-KEY>"\
-  -d '{
-    hookUrl: "<your-webhook-url>",
-    customerCode: "your-storeplum-customer-code"
-  }'
-```
-
-<!-- ```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-``` -->
-
-> Success Response `200 OK`
-
-```json
-{
-  "isSuccess": true,
-  "responseMessage": "success",
-  "object": {
-    "uniqueID" : "subscription-id-for-this-webhook"
-  }
-}
-```
-> Failed Response `400 BAD REQUEST`
-
-```json
-{
-  "isSuccess": false,
-  "responseMessage": "invalid_input",
-  "object": {}
-  
-}
-```
-
-### HTTP Request
-
-`POST https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/order_shipped/subscribe`
-
-### Body Parameters
-
-Parameter | Type | Description
---------- | ---- | -----------
-hookUrl | **String** | Your webhook url where you'd like to listen for this event.
-customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+triggerType | **String** | `new_product`
+platform | **String** | Your app name which is interested in listening to this event. Please check the *Integrations* section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add `zapier` as your platform value. If your app name is Pabbly, add `pabbly` as your platform value and so on.
 
 
 ## New Order Event
@@ -427,7 +367,7 @@ RequestBody body = RequestBody.create(new Gson().toJson(data),
                 MediaType.parse("application/json"));
 
 Request request = new Request.Builder()
-                .url("https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_order/subscribe")
+                .url("https://api.storeplum.in/integration/zapier/new_order/subscribe")
                 .post(body)
                 .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
                 .build();
@@ -435,11 +375,14 @@ Response response = okHttpClient.newCall(request).execute();
 ``` -->
 
 ```shell
-curl "https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_order/subscribe" \
+curl "https://api.dashboard.storeplum.in/integration/subscribe" \
+  -X POST
   -H "X-SP-INTEGRATION: <YOUR-API-KEY>"\
   -d '{
-    hookUrl: "<your-webhook-url>",
-    customerCode: "your-storeplum-customer-code"
+    "hookUrl"      : "<your-webhook-url>",
+    "customerCode" : "<your-storeplum-customer-code>",
+    "triggerType"  : "new_order",
+    "platform"     : "Your app name which is interested in listening to this event."
   }'
 ```
 <!-- 
@@ -474,7 +417,7 @@ let kittens = api.kittens.get();
 
 ### HTTP Request
 
-`POST https://api.storeplum.in/giclee-admin-service/admin/integration/zapier/new_order/subscribe`
+`POST https://api.storeplum.in/integration/subscribe`
 
 ### Body Parameters
 
@@ -482,5 +425,83 @@ Parameter | Type | Description
 --------- | ---- | -----------
 hookUrl | **String** | Your webhook url where you'd like to listen for this event.
 customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+triggerType | **String** | `new_order`
+platform | **String** | Your app name which is interested in listening to this event. Please check the *Integrations* section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add `zapier` as your platform value. If your app name is Pabbly, add `pabbly` as your platform value and so on.
 
+
+## Order Shipped Event
+
+Add your webhook url to start listening to *Order Shipped* event. This event is triggered whenever a order is marked as `Shipped` in your Storeplum account.
+
+<!-- ```java
+import okhttp3.*;
+
+Map<**String**, Object> data = new HashMap<>();
+data.put("hookUrl", "<your-webhook-url>");
+data.put("customerCode", "your-storeplum-customer-code");
+
+RequestBody body = RequestBody.create(new Gson().toJson(data),
+                MediaType.parse("application/json"));
+
+Request request = new Request.Builder()
+                .url("https://api.storeplum.in/integration/zapier/order_shipped/subscribe")
+                .post(body)
+                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
+                .build();
+Response response = okHttpClient.newCall(request).execute();
+``` -->
+
+```shell
+curl "https://api.dashboard.storeplum.in/integration/subscribe" \
+  -X POST
+  -H "X-SP-INTEGRATION: <YOUR-API-KEY>"\
+  -d '{
+    "hookUrl"      : "<your-webhook-url>",
+    "customerCode" : "<your-storeplum-customer-code>",
+    "triggerType"  : "order_shipped",
+    "platform"     : "Your app name which is interested in listening to this event."
+  }'
+```
+
+<!-- ```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+``` -->
+
+> Success Response `200 OK`
+
+```json
+{
+  "isSuccess": true,
+  "responseMessage": "success",
+  "object": {
+    "uniqueID" : "subscription-id-for-this-webhook"
+  }
+}
+```
+> Failed Response `400 BAD REQUEST`
+
+```json
+{
+  "isSuccess": false,
+  "responseMessage": "invalid_input",
+  "object": {}
+  
+}
+```
+
+### HTTP Request
+
+`POST https://api.storeplum.in/integration/subscribe`
+
+### Body Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+hookUrl | **String** | Your webhook url where you'd like to listen for this event.
+customerCode | **String** | Storeplum Customer Code which can be found in your Storeplum Dashboard.
+triggerType | **String** | `order_shipped`
+platform | **String** | Your app name which is interested in listening to this event. Please check the *Integrations* section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add `zapier` as your platform value. If your app name is Pabbly, add `pabbly` as your platform value and so on.
 
