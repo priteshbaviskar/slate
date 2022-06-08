@@ -1,0 +1,992 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="Storeplum - API Reference"
+            content="Storeplum API documentation for external integrations."
+        >
+    <title>Storeplum - API Reference</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-92b9a43d.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-b12a2749.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-8bd23d56.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#api-overview" class="toc-h1 toc-link" data-title="API Overview">API Overview</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-response-format" class="toc-h2 toc-link" data-title="Request/Response Format">Request/Response Format</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#products" class="toc-h1 toc-link" data-title="Products">Products</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-product" class="toc-h2 toc-link" data-title="Create Product">Create Product</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#new-customer-event" class="toc-h2 toc-link" data-title="New Customer Event">New Customer Event</a>
+                  </li>
+                  <li>
+                    <a href="#add-new-product-event" class="toc-h2 toc-link" data-title="Add New Product Event">Add New Product Event</a>
+                  </li>
+                  <li>
+                    <a href="#new-order-event" class="toc-h2 toc-link" data-title="New Order Event">New Order Event</a>
+                  </li>
+                  <li>
+                    <a href="#order-shipped-event" class="toc-h2 toc-link" data-title="Order Shipped Event">Order Shipped Event</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://storeplum.in'>Copyright © 2022 Storeplum</a></li>
+            <li><a href='https://github.com/slatedocs/slate'>Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='api-overview'>API Overview</h1>
+<p>The purpose of this documentation is to understand the list of available Storeplum APIs and their corresponding requests and response for a seamless integration of Storeplum with your app. Storeplum API 1.0 allows data to be created, read and updated using requests in JSON format and using standard REST HTTP methods which are understood by most of the HTTP clients.</p>
+
+<p>The current Storeplum REST API integration version is <code>v1</code> which takes a first-order position in endpoints. </p>
+
+<p>The documentation language binding is in Shell. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h2 id='request-response-format'>Request/Response Format</h2>
+<p>The default response format is JSON. Requests with a responseMessage-body use plain JSON to set or update resource attributes. Successful requests will return a <code>200 OK HTTP</code> status.</p>
+
+<p>Some general information about responses:</p>
+
+<ol>
+<li>Resource IDs are returned as integers.</li>
+<li>Any decimal monetary amount, such as prices or totals, will be returned as <strong>Number</strong> with two decimal places. </li>
+<li>Other amounts, such as item counts, are returned as integers. </li>
+<li>Blank fields are generally included as null or emtpy <strong>String</strong> instead of being omitted.</li>
+</ol>
+<h1 id='authentication'>Authentication</h1>
+<p>Each incoming request from your app to Storeplum API has to be authenticated using an API key. Storeplum uses pre-generated API key for external integrations which can be obtained in <a href="https://dashboard.storeplum.in/">Storeplum Dashboard</a> under integrations section. </p>
+
+<p>In this section, you will see a list of supported apps by Storeplum. Click on your app and select <code>Activate</code>. Once activated, you will see the API key for this integration on the screen. Copy this key and please make sure to save it in a secure location as it won&#39;t be available to view again later.</p>
+
+<p>In case you forget your API key, deactivate the integration and activate it again to get a new key.</p>
+
+<p><img src="images/image-zapier-3c7c6a5d.png" alt="Activating Zapier integration for Storeplum" /></p>
+
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+
+<!-- ```java
+import okhttp3.*;
+
+Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
+                .build();
+Response response = okHttpClient.newCall(request).execute();
+``` -->
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"https://api.storeplum.in/integration/example-endpoint"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span>
+</code></pre></div>
+<!-- ```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+``` -->
+
+<blockquote>
+<p>Make sure to replace the value for header <code>x-sp-integration</code> with your API key.</p>
+</blockquote>
+
+<p>Storeplum uses the above API key to allow access to the APIs. Include this API key in all requests to Storeplum API in a header with name <code>X-SP-INTEGRATION</code></p>
+
+<p><code>X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;</code></p>
+
+<!-- <aside class="notice">
+You must replace <code>YOUR-API-KEY</code> with your personal API key.
+</aside> -->
+<h1 id='products'>Products</h1>
+<p>Product entity is the crux of every online store built on Storeplum. Products can be added manually through Storeplum dashboard or through external API integration services like Zapier and others.</p>
+
+<p><strong>Product States</strong></p>
+
+<p>Following are the various states of a <code>Product</code></p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>UPCOMING</code></td>
+<td>When a new product is added in a Storeplum account, it&#39;s default state is <code>UPCOMING</code>. From here, the Product can move to either <code>ACTIVE</code> or <code>INACTIVE</code> state. Products with status <code>UPCOMING</code> are not visible on the online store.</td>
+</tr>
+<tr>
+<td><code>ACTIVE</code></td>
+<td>A product can be marked as <code>ACTIVE</code> only when all of it&#39;s attributes are added and relevant product images are uploaded. <code>ACTIVE</code> products are visible on the online store.</td>
+</tr>
+<tr>
+<td><code>INACTIVE</code></td>
+<td>A product can be marked as <code>INACTIVE</code> when a user no longer wants it to be visible on their online store. In certain cases like no inventory, A product moves to <code>INACTIVE</code> state by default. An inactive product can be moved back to be active through Storeplum dashboard.</td>
+</tr>
+</tbody></table>
+<h2 id='create-product'>Create Product</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>
+curl <span class="s2">"https://api.storeplum.in/integration/action/product/save"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span><span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span><span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "customerCode": "your-storeplum-customer-code",
+    "productName": "Product name",
+    "productDescription": "Product description",
+    "productSEOTag": "product-seo-tag",
+    "productCategorySeoTag": "product-category-seo-tag",
+    "originalPrice": 123.45,
+    "basePrice": 123.45,
+    "configDefaultDraftName": "Product default configuration name",
+    "productionTimeEstimate": 7,
+    "taxRate": 12.5,
+    "isTaxInclusive": true,
+    "skuCount": 1200
+  }'</span>
+
+</code></pre></div>
+<blockquote>
+<p>Successful Response <code>200 OK</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"product"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"productID"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Failed Response <code>400 BAD REQUEST</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid input"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>In order to add a product through API, you&#39;ll need to use the API integration key from the dashboard and make the below request-</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://api.storeplum.in/integration/action/product/save</code></p>
+<h3 id='http-headers'>HTTP Headers</h3>
+<p><code>X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;</code></p>
+<h3 id='body-parameters'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customerCode</td>
+<td><strong>String</strong></td>
+<td>Storeplum Customer Code which can be found in your Storeplum Dashboard.</td>
+</tr>
+<tr>
+<td>productName</td>
+<td><strong>String</strong></td>
+<td>Name of the product</td>
+</tr>
+<tr>
+<td>productDescripion</td>
+<td><strong>String</strong></td>
+<td>Description of the product. Seen on product landing page.</td>
+</tr>
+<tr>
+<td>productSEOTag</td>
+<td><strong>String</strong></td>
+<td>A unique SEO friendly slug for product page. Please note that two different products cannot have the same slug.</td>
+</tr>
+<tr>
+<td>productCategorySeoTag</td>
+<td><strong>Number</strong></td>
+<td>A unique SEO friendly slug for product category page. A <code>New Product Event</code> from platform returns the <code>productCategorySeoTag</code> for that product.</td>
+</tr>
+<tr>
+<td>originalPrice</td>
+<td><strong>Number</strong></td>
+<td>Product selling price on the website.</td>
+</tr>
+<tr>
+<td>basePrice</td>
+<td><strong>Number</strong></td>
+<td>Defaults to original product price. Discounted price cannot be greater than original price. This price is shown next to the striked off value of the original product price on the website.</td>
+</tr>
+<tr>
+<td>configDefaultDraftName</td>
+<td><strong>String</strong></td>
+<td>Default draft name for this product. Draft name can be same as product name.</td>
+</tr>
+<tr>
+<td>productionTimeEstimate</td>
+<td><strong>Integer</strong></td>
+<td>Add an estimated time in days to ship this product from your warehouse.</td>
+</tr>
+<tr>
+<td>taxRate</td>
+<td><strong>Number</strong></td>
+<td>Tax rate in percentage associated with the product.</td>
+</tr>
+<tr>
+<td>isTaxInclusive</td>
+<td><strong>Integer</strong></td>
+<td>Is tax inclusive in product base price? Enter 1 if tax is inclusive with product price, 0 otherwise.</td>
+</tr>
+<tr>
+<td>skuCount</td>
+<td><strong>Integer</strong></td>
+<td>Default number of stock keeping units for this product.</td>
+</tr>
+</tbody></table>
+<h1 id='webhooks'>Webhooks</h1>
+<p>Storeplum API allows you to listen to various platform events through webhooks. Simply add register your webhook url for a specific event that you&#39;d like to listen to and Storeplum will send you a push notification as soon as the event is triggered. </p>
+
+<p>The following events are currently supported by platform-</p>
+
+<ol>
+<li>New Customer Event</li>
+<li>New Product Event</li>
+<li>New Order Event</li>
+<li>Order Shipped Event</li>
+</ol>
+
+<aside class="warning">You can only register a HTTPS url as a webhook. All HTTP urls will be ignored by default.</aside>
+<h2 id='new-customer-event'>New Customer Event</h2>
+<p>Add your webhook url to start listening to new customer event. This event is triggered whenever a new customer is added to your Storeplum account.</p>
+
+<!-- ```java
+import okhttp3.*;
+
+Map<**String**, Object> data = new HashMap<>();
+data.put("hookUrl", "<your-webhook-url>");
+data.put("customerCode", "your-storeplum-customer-code");
+
+RequestBody body = RequestBody.create(new Gson().toJson(data),
+                MediaType.parse("application/json"));
+
+Request request = new Request.Builder()
+                .url("https://api.storeplum.in/integration/zapier/new_customer/subscribe")
+                .post(body)
+                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
+                .build();
+Response response = okHttpClient.newCall(request).execute();
+``` -->
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.dashboard.storeplum.in/integration/subscribe"</span> <span class="se">\</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span><span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "hookUrl"      : "&lt;your-webhook-url&gt;",
+    "customerCode" : "&lt;your-storeplum-customer-code&gt;",
+    "triggerType"  : "new_customer",
+    "platform"     : "Your app name which is interested in listening to this event."
+  }'</span>
+</code></pre></div>
+<!-- ```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+``` -->
+
+<blockquote>
+<p>Success Response <code>200 OK</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"uniqueID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"subscription-id-for-this-webhook"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Failed Response <code>400 BAD REQUEST</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_input"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.dashboard.storeplum.in/integration/subscribe</code></p>
+<h3 id='body-parameters-2'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hookUrl</td>
+<td><strong>String</strong></td>
+<td>Your webhook url to listen for this event.</td>
+</tr>
+<tr>
+<td>customerCode</td>
+<td><strong>String</strong></td>
+<td>Storeplum Customer Code which can be found in your Storeplum Dashboard.</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td><strong>String</strong></td>
+<td><code>new_customer</code></td>
+</tr>
+<tr>
+<td>platform</td>
+<td><strong>String</strong></td>
+<td>Your app name which is interested in listening to this event. Please check the <em>Integrations</em> section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add <code>zapier</code> as your platform value. If your app name is Pabbly, add <code>pabbly</code> as your platform value and so on.</td>
+</tr>
+</tbody></table>
+<h2 id='add-new-product-event'>Add New Product Event</h2>
+<p>Add your webhook url to start listening to <em>Add New Product</em> event. This event is triggered whenever a new product is added to your Storeplum account.</p>
+
+<!-- ```java
+import okhttp3.*;
+
+Map<**String**, Object> data = new HashMap<>();
+data.put("hookUrl", "<your-webhook-url>");
+data.put("customerCode", "your-storeplum-customer-code");
+
+RequestBody body = RequestBody.create(new Gson().toJson(data),
+                MediaType.parse("application/json"));
+
+Request request = new Request.Builder()
+                .url("https://api.storeplum.in/integration/zapier/new_product/subscribe")
+                .post(body)
+                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
+                .build();
+Response response = okHttpClient.newCall(request).execute();
+``` -->
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.dashboard.storeplum.in/integration/subscribe"</span> <span class="se">\</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span><span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "hookUrl"      : "&lt;your-webhook-url&gt;",
+    "customerCode" : "&lt;your-storeplum-customer-code&gt;",
+    "triggerType"  : "new_product",
+    "platform"     : "Your app name which is interested in listening to this event."
+  }'</span>
+</code></pre></div>
+<!-- ```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+``` -->
+
+<blockquote>
+<p>Success Response <code>200 OK</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"uniqueID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"subscription-id-for-this-webhook"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Failed Response <code>400 BAD REQUEST</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_input"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://api.storeplum.in/integration/subscribe</code></p>
+<h3 id='body-parameters-3'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hookUrl</td>
+<td><strong>String</strong></td>
+<td>Your webhook url where you&#39;d like to listen for this event.</td>
+</tr>
+<tr>
+<td>customerCode</td>
+<td><strong>String</strong></td>
+<td>Storeplum Customer Code which can be found in your Storeplum Dashboard.</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td><strong>String</strong></td>
+<td><code>new_product</code></td>
+</tr>
+<tr>
+<td>platform</td>
+<td><strong>String</strong></td>
+<td>Your app name which is interested in listening to this event. Please check the <em>Integrations</em> section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add <code>zapier</code> as your platform value. If your app name is Pabbly, add <code>pabbly</code> as your platform value and so on.</td>
+</tr>
+</tbody></table>
+<h2 id='new-order-event'>New Order Event</h2>
+<p>Add your webhook url to start listening to add new order event. This event is triggered whenever a new order is added to your Storeplum account.</p>
+
+<!-- ```java
+import okhttp3.*;
+
+Map<**String**, Object> data = new HashMap<>();
+data.put("hookUrl", "<your-webhook-url>");
+data.put("customerCode", "your-storeplum-customer-code");
+
+RequestBody body = RequestBody.create(new Gson().toJson(data),
+                MediaType.parse("application/json"));
+
+Request request = new Request.Builder()
+                .url("https://api.storeplum.in/integration/zapier/new_order/subscribe")
+                .post(body)
+                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
+                .build();
+Response response = okHttpClient.newCall(request).execute();
+``` -->
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.dashboard.storeplum.in/integration/subscribe"</span> <span class="se">\</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span><span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "hookUrl"      : "&lt;your-webhook-url&gt;",
+    "customerCode" : "&lt;your-storeplum-customer-code&gt;",
+    "triggerType"  : "new_order",
+    "platform"     : "Your app name which is interested in listening to this event."
+  }'</span>
+</code></pre></div>
+<!-- 
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+``` -->
+
+<blockquote>
+<p>Success Response <code>200 OK</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"uniqueID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"subscription-id-for-this-webhook"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Failed Response <code>400 BAD REQUEST</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_input"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://api.storeplum.in/integration/subscribe</code></p>
+<h3 id='body-parameters-4'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hookUrl</td>
+<td><strong>String</strong></td>
+<td>Your webhook url where you&#39;d like to listen for this event.</td>
+</tr>
+<tr>
+<td>customerCode</td>
+<td><strong>String</strong></td>
+<td>Storeplum Customer Code which can be found in your Storeplum Dashboard.</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td><strong>String</strong></td>
+<td><code>new_order</code></td>
+</tr>
+<tr>
+<td>platform</td>
+<td><strong>String</strong></td>
+<td>Your app name which is interested in listening to this event. Please check the <em>Integrations</em> section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add <code>zapier</code> as your platform value. If your app name is Pabbly, add <code>pabbly</code> as your platform value and so on.</td>
+</tr>
+</tbody></table>
+<h2 id='order-shipped-event'>Order Shipped Event</h2>
+<p>Add your webhook url to start listening to <em>Order Shipped</em> event. This event is triggered whenever a order is marked as <code>Shipped</code> in your Storeplum account.</p>
+
+<!-- ```java
+import okhttp3.*;
+
+Map<**String**, Object> data = new HashMap<>();
+data.put("hookUrl", "<your-webhook-url>");
+data.put("customerCode", "your-storeplum-customer-code");
+
+RequestBody body = RequestBody.create(new Gson().toJson(data),
+                MediaType.parse("application/json"));
+
+Request request = new Request.Builder()
+                .url("https://api.storeplum.in/integration/zapier/order_shipped/subscribe")
+                .post(body)
+                .addHeader("X-SP-INTEGRATION", <YOUR-API-KEY>)
+                .build();
+Response response = okHttpClient.newCall(request).execute();
+``` -->
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.dashboard.storeplum.in/integration/subscribe"</span> <span class="se">\</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"X-SP-INTEGRATION: &lt;YOUR-API-KEY&gt;"</span><span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "hookUrl"      : "&lt;your-webhook-url&gt;",
+    "customerCode" : "&lt;your-storeplum-customer-code&gt;",
+    "triggerType"  : "order_shipped",
+    "platform"     : "Your app name which is interested in listening to this event."
+  }'</span>
+</code></pre></div>
+<!-- ```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+``` -->
+
+<blockquote>
+<p>Success Response <code>200 OK</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"uniqueID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"subscription-id-for-this-webhook"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Failed Response <code>400 BAD REQUEST</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"responseMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_input"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.storeplum.in/integration/subscribe</code></p>
+<h3 id='body-parameters-5'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hookUrl</td>
+<td><strong>String</strong></td>
+<td>Your webhook url where you&#39;d like to listen for this event.</td>
+</tr>
+<tr>
+<td>customerCode</td>
+<td><strong>String</strong></td>
+<td>Storeplum Customer Code which can be found in your Storeplum Dashboard.</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td><strong>String</strong></td>
+<td><code>order_shipped</code></td>
+</tr>
+<tr>
+<td>platform</td>
+<td><strong>String</strong></td>
+<td>Your app name which is interested in listening to this event. Please check the <em>Integrations</em> section in your Storeplum Dashboard to view supported apps. For example, if your app name is Zapier, then add <code>zapier</code> as your platform value. If your app name is Pabbly, add <code>pabbly</code> as your platform value and so on.</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<p>Standard REST error codes used by Storeplum API</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong or missing.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- You do not have the privilege to view this resource.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified resource could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a resource with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The resource requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many resources.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
